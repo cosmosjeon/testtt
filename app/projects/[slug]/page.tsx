@@ -113,20 +113,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="py-6">
               {/* Version Desktop */}
               <div className="hidden items-center justify-between md:flex">
-                {/* Left side: Logo + Title + Categories */}
+                {/* Left side: Title + Categories */}
                 <div className="flex min-w-0 flex-1 items-center gap-4">
-                  {/* Logo */}
-                  <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-transparent">
-                    <Image
-                      src={projectData.logoUrl}
-                      alt={`${projectData.name} Logo`}
-                      width={64}
-                      height={64}
-                      className="h-full w-full object-cover"
-                      priority
-                    />
-                  </div>
-
                   {/* Title and info */}
                   <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-2">
@@ -184,18 +172,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
               {/* Version Mobile */}
               <div className="space-y-4 md:hidden">
-                {/* Logo + Titre */}
+                {/* Titre */}
                 <div className="flex flex-col items-start gap-2">
-                  <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-transparent">
-                    <Image
-                      src={projectData.logoUrl}
-                      alt={`${projectData.name} Logo`}
-                      width={64}
-                      height={64}
-                      className="h-full w-full object-cover"
-                      priority
-                    />
-                  </div>
                   <div className="min-w-0 flex-1 space-y-1">
                     <h1 className="text-foreground text-xl font-bold">{projectData.name}</h1>
                     <div className="flex flex-wrap gap-1">
@@ -280,13 +258,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               )}
 
-              {/* Product Image / Banner */}
-              {(projectData.productImage || projectData.coverImageUrl) && (
-                <ProjectImageWithLoader
-                  src={(projectData.productImage || projectData.coverImageUrl)!}
-                  alt={`${projectData.name} - Product Image`}
-                />
-              )}
               {/* Description */}
               <div className="w-full">
                 <RichTextDisplay content={projectData.description} />

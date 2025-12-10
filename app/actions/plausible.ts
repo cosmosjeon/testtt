@@ -13,13 +13,9 @@ export async function getLast24hVisitors(): Promise<number | null> {
   const PLAUSIBLE_URL = process.env.PLAUSIBLE_URL
 
   if (!PLAUSIBLE_API_KEY) {
-    console.error("Plausible API key (PLAUSIBLE_API_KEY) is not configured.")
     return null
   }
   if (!PLAUSIBLE_SITE_ID) {
-    console.error(
-      "Plausible Site ID (PLAUSIBLE_SITE_ID) for server-side API calls is not configured.",
-    )
     return null
   }
 
@@ -78,13 +74,9 @@ export async function getLast7DaysVisitors(): Promise<number | null> {
   const PLAUSIBLE_URL = process.env.PLAUSIBLE_URL
 
   if (!PLAUSIBLE_API_KEY) {
-    console.error("Plausible API key (PLAUSIBLE_API_KEY) is not configured.")
     return null
   }
   if (!PLAUSIBLE_SITE_ID) {
-    console.error(
-      "Plausible Site ID (PLAUSIBLE_SITE_ID) for server-side API calls is not configured.",
-    )
     return null
   }
 
@@ -140,13 +132,9 @@ export async function getLast30DaysVisitors(): Promise<number | null> {
   const PLAUSIBLE_URL = process.env.PLAUSIBLE_URL
 
   if (!PLAUSIBLE_API_KEY) {
-    console.error("Plausible API key (PLAUSIBLE_API_KEY) is not configured.")
     return null
   }
   if (!PLAUSIBLE_SITE_ID) {
-    console.error(
-      "Plausible Site ID (PLAUSIBLE_SITE_ID) for server-side API calls is not configured.",
-    )
     return null
   }
 
@@ -202,13 +190,9 @@ export async function getLast30DaysPageviews(): Promise<number | null> {
   const PLAUSIBLE_URL = process.env.PLAUSIBLE_URL
 
   if (!PLAUSIBLE_API_KEY) {
-    console.error("Plausible API key (PLAUSIBLE_API_KEY) is not configured.")
     return null
   }
   if (!PLAUSIBLE_SITE_ID) {
-    console.error(
-      "Plausible Site ID (PLAUSIBLE_SITE_ID) for server-side API calls is not configured.",
-    )
     return null
   }
 
