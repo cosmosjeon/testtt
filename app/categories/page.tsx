@@ -20,8 +20,8 @@ import {
 } from "@/app/actions/projects"
 
 export const metadata = {
-  title: "Categories - Open-Launch",
-  description: "Browse tech products by category on Open-Launch",
+  title: "카테고리 - Open-Launch",
+  description: "Open-Launch에서 카테고리별로 기술 제품을 둘러보세요",
 }
 
 // Composant Skeleton pour le chargement des chaînes
@@ -98,7 +98,7 @@ async function CategoryData({
   if (!categoryData) {
     return (
       <div className="py-12 text-center">
-        <p className="text-muted-foreground">Category not found.</p>
+        <p className="text-muted-foreground">카테고리를 찾을 수 없습니다.</p>
       </div>
     )
   }
@@ -108,12 +108,12 @@ async function CategoryData({
   const getSortLabel = () => {
     switch (sort) {
       case "upvotes":
-        return "Most Upvotes"
+        return "추천 많은 순"
       case "alphabetical":
-        return "A-Z"
+        return "가나다순"
       case "recent":
       default:
-        return "Most Recent"
+        return "최신순"
     }
   }
 
@@ -135,7 +135,7 @@ async function CategoryData({
                 href={`/categories?category=${categoryId}&sort=recent&page=1`}
                 className={sort === "recent" || !sort ? "bg-muted/50 font-medium" : ""}
               >
-                Most Recent
+                최신순
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -143,7 +143,7 @@ async function CategoryData({
                 href={`/categories?category=${categoryId}&sort=upvotes&page=1`}
                 className={sort === "upvotes" ? "bg-muted/50 font-medium" : ""}
               >
-                Most Upvotes
+                추천 많은 순
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -151,7 +151,7 @@ async function CategoryData({
                 href={`/categories?category=${categoryId}&sort=alphabetical&page=1`}
                 className={sort === "alphabetical" ? "bg-muted/50 font-medium" : ""}
               >
-                Alphabetical
+                가나다순
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -160,8 +160,8 @@ async function CategoryData({
 
       {totalCount === 0 ? (
         <div className="text-muted-foreground border-border bg-card rounded-lg border border-dashed py-8 text-center text-sm">
-          No projects in this category yet.
-          <p className="mt-2">Check other categories or come back later.</p>
+          이 카테고리에는 아직 프로젝트가 없습니다.
+          <p className="mt-2">다른 카테고리를 확인하거나 나중에 다시 방문해주세요.</p>
         </div>
       ) : (
         <div className="-mx-3 flex flex-col sm:-mx-4">
@@ -200,11 +200,11 @@ async function CategoryData({
                   : ""
               } `}
             >
-              Previous
+              이전
             </Link>
           </Button>
           <span className="text-muted-foreground text-sm">
-            Page {currentPage} of {totalPages}
+            {currentPage} / {totalPages} 페이지
           </span>
           <Button asChild variant="outline" size="sm" disabled={currentPage >= totalPages}>
             <Link
@@ -216,7 +216,7 @@ async function CategoryData({
                   : ""
               } `}
             >
-              Next
+              다음
             </Link>
           </Button>
         </div>
@@ -247,7 +247,7 @@ export default async function CategoriesPage({
     <main className="bg-secondary/20">
       <div className="container mx-auto min-h-screen max-w-6xl px-4 pt-8 pb-12">
         <div className="mb-6 flex flex-col">
-          <h1 className="text-2xl font-bold">Categories</h1>
+          <h1 className="text-2xl font-bold">카테고리</h1>
 
           <MobileCategorySelector
             categories={categories}
@@ -263,7 +263,7 @@ export default async function CategoriesPage({
                 <CategoryData categoryId={selectedCategoryId} sort={sortParam} page={pageParam} />
               ) : (
                 <div className="py-12 text-center">
-                  <p className="text-muted-foreground">Please select a category.</p>
+                  <p className="text-muted-foreground">카테고리를 선택해주세요.</p>
                 </div>
               )}
             </Suspense>
@@ -272,7 +272,7 @@ export default async function CategoriesPage({
           <div className="top-24 hidden lg:block">
             <div className="space-y-3 py-5 pt-0">
               <div className="flex items-center justify-between">
-                <h3 className="flex items-center gap-2 font-semibold">Browse Categories</h3>
+                <h3 className="flex items-center gap-2 font-semibold">카테고리 둘러보기</h3>
               </div>
               <div className="-mx-2 max-h-[520px] space-y-2 overflow-y-auto pr-2">
                 {categories.map((category) => (
@@ -287,7 +287,7 @@ export default async function CategoriesPage({
                   >
                     <span className="text-sm">{category.name}</span>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
-                      {countMap.get(category.id) || 0} projects
+                      {countMap.get(category.id) || 0}개 프로젝트
                     </span>
                   </Link>
                 ))}
@@ -295,19 +295,19 @@ export default async function CategoriesPage({
             </div>
 
             <div className="space-y-3 py-5">
-              <h3 className="flex items-center gap-2 font-semibold">Quick Access</h3>
+              <h3 className="flex items-center gap-2 font-semibold">빠른 접근</h3>
               <div className="space-y-2">
                 <Link
                   href="/trending"
                   className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                 >
-                  Trending Now
+                  지금 뜨는 프로젝트
                 </Link>
                 <Link
                   href="/trending?filter=month"
                   className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                 >
-                  Best of Month
+                  이달의 베스트
                 </Link>
               </div>
             </div>

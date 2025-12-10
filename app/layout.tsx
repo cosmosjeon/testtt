@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Outfit as FontHeading, Inter as FontSans } from "next/font/google"
+import { Inter as FontSans } from "next/font/google"
 
 import PlausibleProvider from "next-plausible"
 import { Toaster } from "sonner"
@@ -13,40 +13,39 @@ import "./globals.css"
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 })
 
-const fontHeading = FontHeading({
-  subsets: ["latin"],
-  variable: "--font-heading",
-})
+// Use Inter for headings too (consistent with LinkedIn style)
+const fontHeading = fontSans
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL!),
-  title: "Open Launch - Discover the Best Tech Products",
+  title: "바이브코딩 커뮤니티 - 개발자들을 위한 프로젝트 공유 플랫폼",
   description:
-    "Open Launch is a platform to discover and upvote the best tech products. Find top products launching daily.",
+    "바이브코딩 커뮤니티는 개발자들이 자신의 프로젝트를 공유하고 피드백을 받을 수 있는 플랫폼입니다. 매일 새로운 프로젝트를 발견하고 투표하세요.",
   openGraph: {
-    title: "Open Launch - Discover the Best Tech Products",
+    title: "바이브코딩 커뮤니티 - 개발자들을 위한 프로젝트 공유 플랫폼",
     description:
-      "Open Launch is a platform to discover and upvote the best tech products. Find top products launching daily.",
+      "바이브코딩 커뮤니티는 개발자들이 자신의 프로젝트를 공유하고 피드백을 받을 수 있는 플랫폼입니다. 매일 새로운 프로젝트를 발견하고 투표하세요.",
     url: process.env.NEXT_PUBLIC_URL,
-    siteName: "Open Launch",
+    siteName: "바이브코딩 커뮤니티",
     images: [
       {
         url: "og.png",
         width: 1200,
         height: 630,
-        alt: "Open Launch - Discover the Best Tech Products",
+        alt: "바이브코딩 커뮤니티 - 개발자들을 위한 프로젝트 공유 플랫폼",
       },
     ],
-    locale: "en_US",
+    locale: "ko_KR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Open Launch - Discover the Best Tech Products",
+    title: "바이브코딩 커뮤니티 - 개발자들을 위한 프로젝트 공유 플랫폼",
     description:
-      "Open Launch is a platform to discover and upvote the best tech products. Find top products launching daily.",
+      "바이브코딩 커뮤니티는 개발자들이 자신의 프로젝트를 공유하고 피드백을 받을 수 있는 플랫폼입니다. 매일 새로운 프로젝트를 발견하고 투표하세요.",
     images: ["og.png"],
   },
 }
@@ -57,10 +56,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <head>
+        {/* Spoqa Han Sans Neo - Korean Font */}
+        <link rel="preconnect" href="https://spoqa.github.io" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
+          type="text/css"
+        />
         <PlausibleProvider
-          domain="open-launch.com"
+          domain="vibecoding.com"
           customDomain="https://plausible.dailypings.com"
           selfHosted={true}
           trackOutboundLinks={true}
