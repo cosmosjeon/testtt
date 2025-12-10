@@ -86,9 +86,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          {/* Skip to main content link for keyboard navigation */}
+          <a
+            href="#main-content"
+            className="focus:bg-primary focus:text-primary-foreground focus:ring-ring sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:px-4 focus:py-2 focus:ring-2 focus:outline-none"
+          >
+            메인 콘텐츠로 건너뛰기
+          </a>
           <div className="flex min-h-dvh flex-col">
             <Nav />
-            <main className="flex-grow">{children}</main>
+            <main id="main-content" className="flex-grow">
+              {children}
+            </main>
             <Footer />
           </div>
         </ThemeProvider>
