@@ -31,9 +31,7 @@ import {
   LAUNCH_LIMITS,
   LAUNCH_SETTINGS,
   LAUNCH_TYPES,
-  PREMIUM_PAYMENT_LINK,
 } from "@/lib/constants"
-import { UploadButton } from "@/lib/uploadthing"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -50,6 +48,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { BlobUploadButton } from "@/components/upload/blob-upload-button"
 import { notifyDiscordLaunch } from "@/app/actions/discord"
 import {
   checkUserLaunchLimit,
@@ -480,11 +479,9 @@ export function SubmitProjectForm({ userId }: SubmitProjectFormProps) {
       if (formData.launchType === LAUNCH_TYPES.FREE) {
         router.push(`/projects/${projectSlug}`)
       } else {
-        const paymentLink = PREMIUM_PAYMENT_LINK
-
-        const paymentUrl = `${paymentLink}?client_reference_id=${projectId}`
-
-        window.location.href = paymentUrl
+        // Toss Payments 결제 페이지로 리디렉션
+        const paymentUrl = `/payment?projectId=${projectId}&launchType=${formData.launchType}`
+        router.push(paymentUrl)
       }
     } catch (submissionError: unknown) {
       console.error("Error during final submission:", submissionError)
@@ -681,48 +678,23 @@ export function SubmitProjectForm({ userId }: SubmitProjectFormProps) {
                 </div>
               ) : (
                 <div className="mt-2 flex items-center gap-2">
-                  <UploadButton
-                    endpoint="projectLogo"
-                    onUploadBegin={() => {
-                      console.log("Upload Begin (Logo)")
-                      setIsUploadingLogo(true)
+                  <BlobUploadButton
+                    uploadType="logo"
+                    onUploadComplete={(url) => {
+                      console.log("Logo URL set:", url)
+                      setUploadedLogoUrl(url)
                       setError(null)
-                    }}
-                    onClientUploadComplete={(res) => {
-                      console.log("Upload Response (Logo):", res)
                       setIsUploadingLogo(false)
-                      if (res && res.length > 0 && res[0].serverData?.fileUrl) {
-                        setUploadedLogoUrl(res[0].serverData.fileUrl)
-                        console.log("Logo URL set:", res[0].serverData.fileUrl)
-                      } else {
-                        console.error("Logo upload failed: No URL", res)
-                        setError("Logo upload failed: No URL returned.")
-                      }
                     }}
-                    onUploadError={(error: Error) => {
+                    onUploadError={(error) => {
                       console.error("Upload Error (Logo):", error)
+                      setError(`로고 업로드 실패: ${error}`)
                       setIsUploadingLogo(false)
-                      setError(`Logo upload failed: ${error.message}`)
                     }}
-                    appearance={{
-                      button: `ut-button border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm h-9 px-3 inline-flex items-center justify-center gap-2 ${isUploadingLogo ? "opacity-50 pointer-events-none" : ""}`,
-                      allowedContent: "hidden",
-                    }}
-                    content={{
-                      button({ ready, isUploading }) {
-                        if (isUploading) return <RiLoader4Line className="h-4 w-4 animate-spin" />
-                        if (ready)
-                          return (
-                            <>
-                              <RiImageAddLine className="h-4 w-4" /> Upload Logo
-                            </>
-                          )
-                        return "Getting ready..."
-                      },
-                    }}
+                    disabled={isUploadingLogo}
                   />
                   {isUploadingLogo && (
-                    <span className="text-muted-foreground text-xs">Uploading...</span>
+                    <span className="text-muted-foreground text-xs">업로드 중...</span>
                   )}
                 </div>
               )}
@@ -756,51 +728,26 @@ export function SubmitProjectForm({ userId }: SubmitProjectFormProps) {
                 </div>
               ) : (
                 <div className="mt-2 flex items-center gap-2">
-                  <UploadButton
-                    endpoint="projectProductImage"
-                    onUploadBegin={() => {
-                      console.log("Upload Begin (Product Image)")
-                      setIsUploadingProductImage(true)
+                  <BlobUploadButton
+                    uploadType="product"
+                    onUploadComplete={(url) => {
+                      console.log("Product Image URL set:", url)
+                      setFormData((prev) => ({
+                        ...prev,
+                        productImage: url,
+                      }))
                       setError(null)
-                    }}
-                    onClientUploadComplete={(res) => {
-                      console.log("Upload Response (Product Image):", res)
                       setIsUploadingProductImage(false)
-                      if (res && res.length > 0 && res[0].serverData?.fileUrl) {
-                        setFormData((prev) => ({
-                          ...prev,
-                          productImage: res[0].serverData.fileUrl,
-                        }))
-                        console.log("Product Image URL set:", res[0].serverData.fileUrl)
-                      } else {
-                        console.error("Product image upload failed: No URL", res)
-                        setError("Product image upload failed: No URL returned.")
-                      }
                     }}
-                    onUploadError={(error: Error) => {
+                    onUploadError={(error) => {
                       console.error("Upload Error (Product Image):", error)
+                      setError(`제품 이미지 업로드 실패: ${error}`)
                       setIsUploadingProductImage(false)
-                      setError(`Product image upload failed: ${error.message}`)
                     }}
-                    appearance={{
-                      button: `ut-button flex items-center w-fit gap-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-sm h-9 px-3 ${isUploadingProductImage ? "opacity-50 pointer-events-none" : ""}`,
-                      allowedContent: "hidden",
-                    }}
-                    content={{
-                      button({ ready, isUploading }) {
-                        if (isUploading) return <RiLoader4Line className="h-4 w-4 animate-spin" />
-                        if (ready)
-                          return (
-                            <>
-                              <RiImageAddLine className="h-4 w-4" /> Add Product Image
-                            </>
-                          )
-                        return "Getting ready..."
-                      },
-                    }}
+                    disabled={isUploadingProductImage}
                   />
                   {isUploadingProductImage && (
-                    <span className="text-muted-foreground text-xs">Uploading...</span>
+                    <span className="text-muted-foreground text-xs">업로드 중...</span>
                   )}
                 </div>
               )}

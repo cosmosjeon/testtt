@@ -4,43 +4,39 @@ import { NextResponse } from "next/server"
 import { db } from "@/drizzle/db"
 import { launchQuota, launchStatus, launchType, project } from "@/drizzle/db/schema"
 import { eq, sql } from "drizzle-orm"
-import Stripe from "stripe"
 
-// Initialiser le client Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
+const webhookSecret = process.env.TOSS_WEBHOOK_SECRET!
 
 export async function POST(request: Request) {
   try {
     const body = await request.text()
-    const signature = request.headers.get("stripe-signature") as string
+    const signature = request.headers.get("toss-signature") as string
 
-    // Vérifier la signature du webhook
-    let event: Stripe.Event
-    try {
-      event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
-    } catch (err) {
-      console.error("Webhook signature verification failed:", err)
-      return NextResponse.json({ error: "Webhook signature verification failed" }, { status: 400 })
+    // Toss Payments 웹훅 서명 검증 (HMAC-SHA256)
+    if (webhookSecret) {
+      const crypto = require("crypto")
+      const computedSignature = crypto
+        .createHmac("sha256", webhookSecret)
+        .update(body)
+        .digest("hex")
+
+      if (computedSignature !== signature) {
+        console.error("Webhook signature verification failed")
+        return NextResponse.json({ error: "Invalid signature" }, { status: 401 })
+      }
     }
 
-    // Traiter l'événement
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session
+    const event = JSON.parse(body)
 
-      // Find the project using client_reference_id (which we set as projectId)
-      const projectId = session.client_reference_id
-      if (!projectId) {
-        console.error("No project ID found in session metadata")
-        return NextResponse.json(
-          { error: "No project ID found in session metadata" },
-          { status: 400 },
-        )
-      }
+    // 결제 확인 이벤트 처리
+    if (event.eventType === "PAYMENT_CONFIRMED") {
+      const { orderId, status, paymentKey } = event.data
 
-      // Vérifier si le paiement a réussi
-      if (session.payment_status === "paid") {
-        // Récupérer les informations de la chaîne
+      // orderId = projectId
+      const projectId = orderId
+
+      if (status === "DONE") {
+        // 결제 성공
         const [projectData] = await db
           .select({
             id: project.id,
@@ -51,27 +47,24 @@ export async function POST(request: Request) {
           .where(eq(project.id, projectId))
 
         if (!projectData) {
-          console.error("Project not found:", projectId)
           return NextResponse.json({ error: "Project not found" }, { status: 404 })
         }
 
         if (!projectData.scheduledLaunchDate) {
-          console.error("Project data incomplete:", projectId)
           return NextResponse.json({ error: "Project data incomplete" }, { status: 400 })
         }
 
-        // Update the project status to 'scheduled'
+        // 프로젝트 상태를 SCHEDULED로 업데이트
         await db
           .update(project)
           .set({
             launchStatus: launchStatus.SCHEDULED,
-            // Pour Premium Plus, activer la mise en avant sur la page d'accueil
             featuredOnHomepage: projectData.launchType === launchType.PREMIUM_PLUS,
             updatedAt: new Date(),
           })
           .where(eq(project.id, projectId))
 
-        // Mettre à jour le quota pour cette date
+        // 런치 쿼터 업데이트
         const launchDate = projectData.scheduledLaunchDate
         const quotaResult = await db
           .select()
@@ -80,7 +73,6 @@ export async function POST(request: Request) {
           .limit(1)
 
         if (quotaResult.length === 0) {
-          // Créer un nouveau quota
           await db.insert(launchQuota).values({
             id: crypto.randomUUID(),
             date: launchDate,
@@ -91,7 +83,6 @@ export async function POST(request: Request) {
             updatedAt: new Date(),
           })
         } else {
-          // Mettre à jour le quota existant
           await db
             .update(launchQuota)
             .set({
@@ -108,17 +99,10 @@ export async function POST(request: Request) {
             .where(eq(launchQuota.id, quotaResult[0].id))
         }
 
-        // Revalidate the project page path using the project ID
-        try {
-          revalidatePath(`/projects`) // Revalidation plus large pour l'instant
-          console.log(`Revalidated path for project: ${projectId}`)
-        } catch (revalidateError) {
-          console.error("Error revalidating path:", revalidateError)
-        }
-
+        revalidatePath(`/projects`)
         return NextResponse.json({ success: true })
       } else {
-        // Si le paiement n'a pas réussi, mettre à jour le statut à PAYMENT_FAILED
+        // 결제 실패
         await db
           .update(project)
           .set({
@@ -129,25 +113,8 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ success: true })
       }
-    } else if (event.type === "checkout.session.expired") {
-      const session = event.data.object as Stripe.Checkout.Session
-      const projectId = session.client_reference_id
-
-      if (projectId) {
-        // Mettre à jour le statut de la chaîne à PAYMENT_FAILED
-        await db
-          .update(project)
-          .set({
-            launchStatus: launchStatus.PAYMENT_FAILED,
-            updatedAt: new Date(),
-          })
-          .where(eq(project.id, projectId))
-      }
-
-      return NextResponse.json({ success: true })
     }
 
-    // Pour les autres types d'événements
     return NextResponse.json({ received: true })
   } catch (error) {
     console.error("Webhook error:", error)

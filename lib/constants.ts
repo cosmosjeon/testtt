@@ -64,8 +64,13 @@ export const UPVOTE_LIMITS = {
   DEBOUNCE_TIME_MS: 500, // Temps de debounce côté client (500ms)
 } as const
 
-export const PREMIUM_PAYMENT_LINK = process.env.NEXT_PUBLIC_PREMIUM_PAYMENT_LINK!
-export const PREMIUM_PLUS_PAYMENT_LINK = process.env.NEXT_PUBLIC_PREMIUM_PLUS_PAYMENT_LINK!
+// Toss Payments 가격 (KRW)
+export const PAYMENT_AMOUNTS = {
+  PREMIUM_KRW: 10000, // ~$9 USD (1,100원/달러)
+  PREMIUM_PLUS_KRW: 15000, // ~$14 USD
+} as const
+
+export const USD_TO_KRW_RATE = 1100
 
 export const SPONSORSHIP_SLOTS = {
   TOTAL: 3,
