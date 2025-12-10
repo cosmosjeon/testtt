@@ -22,7 +22,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
       <NavigationMenuList className="gap-1">
         <NavigationMenuItem>
           <NavigationMenuTrigger className="h-9 cursor-pointer px-3 text-sm">
-            Explore
+            둘러보기
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[280px] gap-1 p-2">
@@ -32,9 +32,9 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/trending"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Trending Now</div>
+                    <div className="mb-1 font-medium">트렌딩</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      Discover the most popular projects
+                      가장 인기있는 프로젝트를 확인하세요
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -45,9 +45,9 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/winners"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Daily Winners</div>
+                    <div className="mb-1 font-medium">일일 우승자</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      See the best projects of the day
+                      오늘의 베스트 프로젝트를 확인하세요
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -58,9 +58,9 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/trending?filter=month"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Best of Month</div>
+                    <div className="mb-1 font-medium">이달의 베스트</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      See the best projects of the month
+                      이달의 베스트 프로젝트를 확인하세요
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -71,9 +71,9 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                     href="/categories"
                     className="block rounded-md px-2 py-2 text-sm no-underline transition-colors outline-none select-none"
                   >
-                    <div className="mb-1 font-medium">Categories</div>
+                    <div className="mb-1 font-medium">카테고리</div>
                     <p className="text-muted-foreground text-xs leading-tight">
-                      Browse projects by category
+                      카테고리별로 프로젝트를 찾아보세요
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -89,7 +89,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
                 href="/dashboard"
                 className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}
               >
-                Dashboard
+                대시보드
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -101,7 +101,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
               href="/projects/submit"
               className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}
             >
-              Submit Project
+              프로젝트 제출
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
@@ -109,7 +109,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link href="/pricing" className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}>
-              Pricing
+              가격
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
@@ -117,7 +117,7 @@ export function NavMenu({ showDashboard = true }: NavMenuProps) {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link href="/sponsors" className={`${navigationMenuTriggerStyle()} h-9 px-3 text-sm`}>
-              Sponsors
+              스폰서
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>

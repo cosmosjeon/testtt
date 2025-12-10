@@ -28,22 +28,22 @@ export default async function Home() {
 
   return (
     <main className="bg-muted/30 min-h-screen">
-      <div className="container mx-auto max-w-6xl px-4 pt-6 pb-12 md:pt-8">
+      <div className="container mx-auto max-w-[1200px] px-4 pt-6 pb-12 md:pt-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:items-start">
           {/* Contenu principal */}
           <div className="space-y-6 sm:space-y-8 lg:col-span-2">
             {/* Welcome */}
             <div className="bg-secondary/70 hover:bg-secondary border-border/40 relative z-10 overflow-hidden rounded-lg border">
-              <div className="container mx-auto max-w-6xl px-4 py-3 md:py-4">
+              <div className="container mx-auto max-w-[1200px] px-4 py-3 md:py-4">
                 {/* Mobile Layout - Centered */}
                 <div className="flex flex-col items-center justify-center gap-3 md:hidden">
                   <Link href="/pricing" className="flex cursor-pointer flex-col gap-2 text-center">
                     <div>
                       <h1 className="text-foreground text-base font-semibold">
-                        <span>Launch platform for your products</span>
+                        <span>개발자들을 위한 프로젝트 공유 플랫폼</span>
                       </h1>
                       <p className="text-muted-foreground text-xs">
-                        <span>Submit, get a badge & backlink</span>
+                        <span>프로젝트를 공유하고 피드백을 받으세요</span>
                       </p>
                     </div>
                   </Link>
@@ -83,10 +83,10 @@ export default async function Home() {
                   <div className="flex flex-col items-center justify-center gap-4 text-center">
                     <Link href="/pricing" className="cursor-pointer">
                       <h1 className="text-foreground text-lg font-semibold">
-                        <span>Launch platform for your products</span>
+                        <span>개발자들을 위한 프로젝트 공유 플랫폼</span>
                       </h1>
                       <p className="text-muted-foreground text-sm">
-                        <span>Submit, get a badge & backlink</span>
+                        <span>프로젝트를 공유하고 피드백을 받으세요</span>
                       </p>
                     </Link>
                     <div>
@@ -123,14 +123,14 @@ export default async function Home() {
             </div>
 
             <ProjectSection
-              title="Top Projects Launching Today"
+              title="오늘의 인기 프로젝트"
               projects={todayProjects}
               sortByUpvotes={true}
               isAuthenticated={!!session?.user}
             />
 
             <ProjectSection
-              title="Yesterday's Launches"
+              title="어제의 프로젝트"
               projects={yesterdayProjects}
               moreHref="/trending?filter=yesterday"
               sortByUpvotes={true}
@@ -138,7 +138,7 @@ export default async function Home() {
             />
 
             <ProjectSection
-              title="This Month's Best"
+              title="이번 달 베스트"
               projects={monthProjects}
               moreHref="/trending?filter=month"
               sortByUpvotes={true}
@@ -151,20 +151,20 @@ export default async function Home() {
             {/* Statistics */}
             {(last30DaysVisitors !== null || last30DaysPageviews !== null) && (
               <div className="space-y-3 pt-0 pb-4">
-                <h3 className="flex items-center gap-2 font-semibold">Statistics (Last 30 Days)</h3>
+                <h3 className="flex items-center gap-2 font-semibold">통계 (최근 30일)</h3>
 
                 <div className="grid grid-cols-2 gap-4">
                   {last30DaysVisitors !== null && (
                     <div className="hover:bg-muted/40 rounded-md border p-2 text-center transition-colors">
                       <div className="text-xl font-bold">{last30DaysVisitors}</div>
-                      <div className="text-muted-foreground text-xs font-medium">Visitors</div>
+                      <div className="text-muted-foreground text-xs font-medium">방문자</div>
                     </div>
                   )}
 
                   {last30DaysPageviews !== null && (
                     <div className="hover:bg-muted/40 rounded-md border p-2 text-center transition-colors">
                       <div className="text-xl font-bold">{last30DaysPageviews}</div>
-                      <div className="text-muted-foreground text-xs font-medium">Page Views</div>
+                      <div className="text-muted-foreground text-xs font-medium">페이지뷰</div>
                     </div>
                   )}
                 </div>
@@ -172,17 +172,17 @@ export default async function Home() {
             )}
             {/* Sponsors */}
             <div className="space-y-3 py-4">
-              <h3 className="flex items-center font-semibold">Sponsors</h3>
+              <h3 className="flex items-center font-semibold">스폰서</h3>
               <SponsorCards />
             </div>
 
             {/* Categories */}
             <div className="space-y-3 py-4">
               <div className="flex items-center justify-between">
-                <h3 className="flex items-center gap-2 font-semibold">Top Categories</h3>
+                <h3 className="flex items-center gap-2 font-semibold">인기 카테고리</h3>
                 <Button variant="ghost" size="sm" className="text-sm" asChild>
                   <Link href="/categories" className="flex items-center gap-1">
-                    View all
+                    전체보기
                   </Link>
                 </Button>
               </div>
@@ -198,7 +198,7 @@ export default async function Home() {
                   >
                     <span className="text-sm">{category.name}</span>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
-                      {category.count} projects
+                      {category.count}개
                     </span>
                   </Link>
                 ))}
@@ -216,33 +216,33 @@ export default async function Home() {
 
             {/* Quick Links */}
             <div className="space-y-3 py-4">
-              <h3 className="flex items-center gap-2 font-semibold">Quick Access</h3>
+              <h3 className="flex items-center gap-2 font-semibold">빠른 메뉴</h3>
               <div className="space-y-2">
                 {session?.user && (
                   <Link
                     href="/dashboard"
                     className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                   >
-                    Dashboard
+                    대시보드
                   </Link>
                 )}
                 <Link
                   href="/trending"
                   className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                 >
-                  Trending Now
+                  트렌딩
                 </Link>
                 <Link
                   href="/winners"
                   className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                 >
-                  Daily Winners
+                  일일 우승자
                 </Link>
                 <Link
                   href="/trending?filter=month"
                   className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                 >
-                  Best of Month
+                  이달의 베스트
                 </Link>
               </div>
             </div>

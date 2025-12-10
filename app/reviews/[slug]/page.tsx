@@ -104,7 +104,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug: s
 
   return (
     <div className="bg-background min-h-screen">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1200px] px-4 py-8 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-4">
           <Link

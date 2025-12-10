@@ -32,35 +32,35 @@ import {
 } from "@/components/ui/dialog"
 
 export const metadata = {
-  title: "Pricing - Open-Launch",
-  description: "Choose the perfect plan for your project launch",
+  title: "가격 - Open-Launch",
+  description: "프로젝트 론칭에 완벽한 플랜을 선택하세요",
 }
 
 const faqItems = [
   {
     id: "1",
-    title: "When do launches happen?",
-    content: `All launches happen at 8:00 AM UTC. We launch a limited number of projects each day to ensure quality visibility.`,
+    title: "론칭은 언제 진행되나요?",
+    content: `모든 론칭은 UTC 기준 오전 8시에 진행됩니다. 품질있는 노출을 보장하기 위해 매일 제한된 수의 프로젝트를 론칭합니다.`,
   },
   {
     id: "2",
-    title: "How many projects are launched each day?",
-    content: `We launch up to ${LAUNCH_LIMITS.FREE_DAILY_LIMIT} free projects and ${LAUNCH_LIMITS.PREMIUM_DAILY_LIMIT} premium projects daily.`,
+    title: "매일 몇 개의 프로젝트가 론칭되나요?",
+    content: `매일 최대 ${LAUNCH_LIMITS.FREE_DAILY_LIMIT}개의 무료 프로젝트와 ${LAUNCH_LIMITS.PREMIUM_DAILY_LIMIT}개의 프리미엄 프로젝트를 론칭합니다.`,
   },
   {
     id: "3",
-    title: "How far in advance can I schedule my launch?",
-    content: `Free users can schedule up to ${LAUNCH_SETTINGS.MAX_DAYS_AHEAD} days in advance and Premium users up to ${LAUNCH_SETTINGS.PREMIUM_MAX_DAYS_AHEAD} days.`,
+    title: "얼마나 미리 론칭을 예약할 수 있나요?",
+    content: `무료 사용자는 최대 ${LAUNCH_SETTINGS.MAX_DAYS_AHEAD}일, 프리미엄 사용자는 최대 ${LAUNCH_SETTINGS.PREMIUM_MAX_DAYS_AHEAD}일 전에 예약할 수 있습니다.`,
   },
   {
     id: "4",
-    title: "What is the refund policy for the SEO Growth Package?",
-    content: `We do not offer refunds for the SEO Growth Package. Once purchased, the service is considered final and non-refundable. However, we do our best to ensure customer satisfaction and work closely with you throughout the process.`,
+    title: "SEO 성장 패키지의 환불 정책은 어떻게 되나요?",
+    content: `SEO 성장 패키지에 대한 환불은 제공하지 않습니다. 구매 후 서비스는 최종적이며 환불 불가합니다. 다만, 고객 만족을 위해 최선을 다하며 전체 과정에서 긴밀히 협력합니다.`,
   },
   {
     id: "5",
-    title: "How is the SEO Growth Package content created?",
-    content: `Our content creation process involves thorough product testing, note-taking, screenshots, and custom illustrations. While we use AI assistance to optimize our workflow after testing your product, all content is carefully reviewed, edited, and finalized by us, a human team, to ensure quality and accuracy.`,
+    title: "SEO 성장 패키지 콘텐츠는 어떻게 제작되나요?",
+    content: `콘텐츠 제작 과정은 철저한 제품 테스트, 메모 작성, 스크린샷, 맞춤 일러스트레이션을 포함합니다. 제품 테스트 후 워크플로우 최적화를 위해 AI를 활용하지만, 모든 콘텐츠는 품질과 정확성을 보장하기 위해 인간 팀이 꼼꼼히 검토하고 편집하여 최종 완성합니다.`,
   },
 ]
 
@@ -115,10 +115,10 @@ export default async function PricingPage() {
       </div>
 
       <div className="mb-4 text-center">
-        <h1 className="mb-3 text-2xl font-bold sm:text-3xl">Choose Your Launch Plan</h1>
+        <h1 className="mb-3 text-2xl font-bold sm:text-3xl">론칭 플랜 선택</h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-sm">
-          Get the visibility your project deserves with our flexible launch options. All launches
-          happen at 8:00 AM UTC.
+          유연한 론칭 옵션으로 프로젝트가 받아야 할 가시성을 얻으세요. 모든 론칭은 UTC 기준 오전
+          8시에 진행됩니다.
         </p>
       </div>
 
@@ -128,34 +128,34 @@ export default async function PricingPage() {
           {/* Free Launch Option */}
           <div className="flex h-full flex-col p-5 md:col-span-4">
             <div className="flex-grow">
-              <h5 className="mb-2 text-base font-medium">Free Launch</h5>
+              <h5 className="mb-2 text-base font-medium">무료 론칭</h5>
               <div className="mb-2 text-2xl font-bold">
-                $0 <span className="text-muted-foreground text-sm font-normal">/launch</span>
+                $0 <span className="text-muted-foreground text-sm font-normal">/론칭</span>
               </div>
               <p className="text-muted-foreground mb-3 text-xs">
-                Standard launch with up to {LAUNCH_SETTINGS.MAX_DAYS_AHEAD} days scheduling window.
+                최대 {LAUNCH_SETTINGS.MAX_DAYS_AHEAD}일 예약 가능한 표준 론칭
               </p>
 
               <ul className="mb-5 space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <RiCheckboxCircleFill className="text-muted-foreground h-4 w-4" />
-                  <span>{LAUNCH_LIMITS.FREE_DAILY_LIMIT} slots available daily</span>
+                  <span>매일 {LAUNCH_LIMITS.FREE_DAILY_LIMIT}개 슬롯 제공</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <RiCheckboxCircleFill className="text-muted-foreground h-4 w-4" />
-                  <span>Standard launch queue</span>
+                  <span>표준 론칭 대기열</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <RiCheckboxCircleFill className="text-muted-foreground h-4 w-4" />
-                  <span>Featured on homepage</span>
+                  <span>홈페이지 등록</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <RiCheckboxCircleFill className="text-muted-foreground mt-1 h-4 w-4" />
                   <div>
-                    <span>Dofollow Backlink only if:</span>
+                    <span>다음 조건 시 Dofollow 백링크 제공:</span>
                     <div className="text-muted-foreground mt-1.5 space-y-1 text-xs">
-                      <div>1. Top 3 daily ranking</div>
-                      <div>2. Display our badge on your site</div>
+                      <div>1. 일일 순위 상위 3위</div>
+                      <div>2. 사이트에 저희 뱃지 표시</div>
                     </div>
                   </div>
                 </li>
@@ -164,7 +164,7 @@ export default async function PricingPage() {
 
             <div className="mt-auto pt-3">
               <Button variant="outline" size="sm" className="w-full" asChild>
-                <Link href="/projects/submit">Launch for Free</Link>
+                <Link href="/projects/submit">무료 론칭</Link>
               </Button>
             </div>
           </div>
@@ -173,44 +173,40 @@ export default async function PricingPage() {
           <div className="bg-muted/5 border-t p-5 md:col-span-6 md:border-t-0 md:border-l">
             <div className="flex h-full flex-col">
               <div className="flex-grow">
-                <h5 className="mb-2 text-base font-medium">Premium Launch</h5>
+                <h5 className="mb-2 text-base font-medium">프리미엄 론칭</h5>
                 <div className="mb-2 text-2xl font-bold">
                   ${LAUNCH_SETTINGS.PREMIUM_PRICE}{" "}
-                  <span className="text-muted-foreground text-sm font-normal">/launch</span>
+                  <span className="text-muted-foreground text-sm font-normal">/론칭</span>
                 </div>
-                <p className="text-muted-foreground mb-3 text-xs">
-                  Priority scheduling with faster launch dates.
-                </p>
+                <p className="text-muted-foreground mb-3 text-xs">더 빠른 론칭 날짜로 우선 예약</p>
 
                 <ul className="mb-5 space-y-2 text-sm">
                   <li className="flex items-center gap-2">
                     <RiCheckboxCircleFill className="text-primary h-4 w-4" />
-                    <span className="font-semibold">Skip the Free Queue - Priority access</span>
+                    <span className="font-semibold">무료 대기열 건너뛰기 - 우선 접근</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <RiCheckboxCircleFill className="text-primary h-4 w-4" />
-                    <span className="font-semibold">
-                      Guaranteed High Authority Dofollow Backlink
-                    </span>
+                    <span className="font-semibold">고권위 Dofollow 백링크 보장</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <RiCheckboxCircleFill className="text-primary h-4 w-4" />
-                    <span>{LAUNCH_LIMITS.PREMIUM_DAILY_LIMIT} premium slots daily</span>
+                    <span>매일 {LAUNCH_LIMITS.PREMIUM_DAILY_LIMIT}개 프리미엄 슬롯</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <RiCheckboxCircleFill className="text-primary h-4 w-4" />
-                    <span>Earlier launch dates</span>
+                    <span>더 빠른 론칭 날짜</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <RiCheckboxCircleFill className="text-primary h-4 w-4" />
-                    <span>Featured on homepage</span>
+                    <span>홈페이지 등록</span>
                   </li>
                 </ul>
               </div>
 
               <div className="mt-auto pt-3">
                 <Button size="sm" className="w-full" asChild>
-                  <Link href="/projects/submit">Get Premium</Link>
+                  <Link href="/projects/submit">프리미엄 시작하기</Link>
                 </Button>
               </div>
             </div>
@@ -224,7 +220,7 @@ export default async function PricingPage() {
           <div className="flex flex-col md:flex-row">
             <div className="mb-6 flex flex-col md:mb-0 md:w-2/5 md:border-r md:pr-6">
               <div className="flex-grow">
-                <h5 className="mb-1 text-lg font-semibold">SEO Growth Package</h5>
+                <h5 className="mb-1 text-lg font-semibold">SEO 성장 패키지</h5>
                 <div className="mb-4 flex flex-col gap-1">
                   <div className="flex items-baseline text-3xl font-bold">
                     ${LAUNCH_SETTINGS.ARTICLE_PRICE}
@@ -234,7 +230,7 @@ export default async function PricingPage() {
                   </div>
                 </div>
                 <p className="text-muted-foreground mb-6 text-xs">
-                  Rank on Google with a dedicated SEO article
+                  전용 SEO 아티클로 구글 랭킹 달성
                 </p>
               </div>
 
@@ -242,16 +238,14 @@ export default async function PricingPage() {
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button size="sm" className="w-full" variant="default">
-                      Get SEO Growth Package
+                      SEO 성장 패키지 받기
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-h-[90vh] max-w-md overflow-y-auto sm:max-w-lg">
                     <DialogHeader className="pb-6">
-                      <DialogTitle className="text-xl font-semibold">
-                        SEO Growth Package
-                      </DialogTitle>
+                      <DialogTitle className="text-xl font-semibold">SEO 성장 패키지</DialogTitle>
                       <DialogDescription className="text-muted-foreground">
-                        Complete SEO solution to rank on Google
+                        구글 랭킹을 위한 완벽한 SEO 솔루션
                       </DialogDescription>
                     </DialogHeader>
 
@@ -268,16 +262,16 @@ export default async function PricingPage() {
 
                       {/* What's included */}
                       <div>
-                        <h3 className="mb-4 font-medium">What you get:</h3>
+                        <h3 className="mb-4 font-medium">포함 내용:</h3>
                         <div className="space-y-3">
                           <div className="flex gap-3">
                             <div className="bg-primary/10 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded">
                               <RiArticleLine className="text-primary h-3 w-3" />
                             </div>
                             <div className="min-w-0">
-                              <div className="text-sm font-medium">SEO Article</div>
+                              <div className="text-sm font-medium">SEO 아티클</div>
                               <div className="text-muted-foreground text-xs">
-                                Custom &ldquo;[Product] review&rdquo; content
+                                맞춤 &ldquo;[제품명] 리뷰&rdquo; 콘텐츠
                               </div>
                             </div>
                           </div>
@@ -286,9 +280,9 @@ export default async function PricingPage() {
                               <RiLinkM className="text-primary h-3 w-3" />
                             </div>
                             <div className="min-w-0">
-                              <div className="text-sm font-medium">Premium Launch</div>
+                              <div className="text-sm font-medium">프리미엄 론칭</div>
                               <div className="text-muted-foreground text-xs">
-                                High Authority dofollow backlink included
+                                고권위 dofollow 백링크 포함
                               </div>
                             </div>
                           </div>
@@ -297,22 +291,22 @@ export default async function PricingPage() {
 
                       {/* Process */}
                       <div>
-                        <h3 className="mb-4 font-medium">What happens next:</h3>
+                        <h3 className="mb-4 font-medium">진행 과정:</h3>
                         <div className="space-y-3">
                           <div className="flex gap-3">
                             <div className="bg-primary flex h-5 w-5 flex-shrink-0 items-center justify-center rounded text-xs font-medium text-white">
                               1
                             </div>
-                            <div className="text-sm">Pay & secure your slot</div>
+                            <div className="text-sm">결제 및 슬롯 확보</div>
                           </div>
                           <div className="flex gap-3">
                             <div className="bg-primary flex h-5 w-5 flex-shrink-0 items-center justify-center rounded text-xs font-medium text-white">
                               2
                             </div>
                             <div className="text-sm">
-                              <div>We contact you in 24h</div>
+                              <div>24시간 내 연락</div>
                               <div className="text-muted-foreground text-xs">
-                                Product access, keywords, details
+                                제품 접근, 키워드, 세부사항
                               </div>
                             </div>
                           </div>
@@ -320,13 +314,13 @@ export default async function PricingPage() {
                             <div className="bg-primary flex h-5 w-5 flex-shrink-0 items-center justify-center rounded text-xs font-medium text-white">
                               3
                             </div>
-                            <div className="text-sm">Premium launch next day</div>
+                            <div className="text-sm">다음날 프리미엄 론칭</div>
                           </div>
                           <div className="flex gap-3">
                             <div className="bg-primary flex h-5 w-5 flex-shrink-0 items-center justify-center rounded text-xs font-medium text-white">
                               4
                             </div>
-                            <div className="text-sm">SEO article in 5-7 days</div>
+                            <div className="text-sm">5-7일 내 SEO 아티클 완성</div>
                           </div>
                         </div>
                       </div>
@@ -336,8 +330,7 @@ export default async function PricingPage() {
                         <div className="flex gap-2">
                           <RiInformationLine className="text-muted-foreground mt-0.5 h-4 w-4 flex-shrink-0" />
                           <div className="text-sm">
-                            <span className="font-medium">Requirement:</span> Free product access
-                            for testing
+                            <span className="font-medium">필수사항:</span> 테스트용 무료 제품 접근
                           </div>
                         </div>
                       </div>
@@ -345,7 +338,7 @@ export default async function PricingPage() {
                       {/* Button */}
                       <Button className="h-11 w-full" asChild>
                         <Link href={process.env.NEXT_PUBLIC_SEO_ARTICLE_LINK!} target="_blank">
-                          Get SEO Package - ${LAUNCH_SETTINGS.ARTICLE_PRICE}
+                          SEO 패키지 받기 - ${LAUNCH_SETTINGS.ARTICLE_PRICE}
                         </Link>
                       </Button>
                     </div>
@@ -355,20 +348,19 @@ export default async function PricingPage() {
             </div>
 
             <div className="md:w-3/5 md:pl-6">
-              <h6 className="mb-3 text-sm font-semibold">Complete SEO Package includes:</h6>
+              <h6 className="mb-3 text-sm font-semibold">완전한 SEO 패키지 포함 내용:</h6>
 
               <div className="space-y-1">
                 <div className="bg-primary/5 border-primary/20 rounded border p-2">
                   <div className="flex items-start gap-2">
                     <RiCheckboxCircleFill className="text-primary mt-0.5 h-4 w-4" />
                     <div>
-                      <p className="text-sm font-semibold">Dedicated SEO Article</p>
+                      <p className="text-sm font-semibold">전용 SEO 아티클</p>
                       <p className="text-muted-foreground text-xs">
-                        Custom article to rank for{" "}
                         <span className="text-primary/90 font-semibold">
-                          &ldquo;[Your Product] review&rdquo;
+                          &ldquo;[제품명] 리뷰&rdquo;
                         </span>{" "}
-                        keywords
+                        키워드 랭킹을 위한 맞춤 아티클
                       </p>
                     </div>
                   </div>
@@ -377,9 +369,9 @@ export default async function PricingPage() {
                   <div className="flex items-start gap-2">
                     <RiCheckboxCircleFill className="text-primary mt-0.5 h-4 w-4" />
                     <div>
-                      <p className="text-sm font-semibold">Premium Launch</p>
+                      <p className="text-sm font-semibold">프리미엄 론칭</p>
                       <p className="text-muted-foreground text-xs">
-                        Premium spot + High Authority dofollow backlink
+                        프리미엄 스팟 + 고권위 dofollow 백링크
                       </p>
                     </div>
                   </div>
@@ -388,9 +380,9 @@ export default async function PricingPage() {
                   <div className="flex items-start gap-2">
                     <RiCheckboxCircleFill className="text-primary mt-0.5 h-4 w-4" />
                     <div>
-                      <p className="text-sm font-medium">Google Ranking Strategy</p>
+                      <p className="text-sm font-medium">구글 랭킹 전략</p>
                       <p className="text-muted-foreground text-xs">
-                        Optimized content to capture search traffic
+                        검색 트래픽 확보를 위한 최적화 콘텐츠
                       </p>
                     </div>
                   </div>
@@ -400,9 +392,9 @@ export default async function PricingPage() {
                   <div className="flex items-start gap-2">
                     <RiCheckboxCircleFill className="text-primary mt-0.5 h-4 w-4" />
                     <div>
-                      <p className="text-sm font-medium">Long-term SEO Value</p>
+                      <p className="text-sm font-medium">장기 SEO 가치</p>
                       <p className="text-muted-foreground text-xs">
-                        Content that ranks and drives ongoing traffic
+                        지속적인 트래픽을 유도하는 콘텐츠
                       </p>
                     </div>
                   </div>
@@ -417,9 +409,9 @@ export default async function PricingPage() {
       {latestReviews.length > 0 && (
         <div className="mx-auto mb-12 max-w-5xl">
           <div className="mb-8 text-center">
-            <h2 className="mb-3 text-xl font-bold sm:text-2xl">Latest Reviews</h2>
+            <h2 className="mb-3 text-xl font-bold sm:text-2xl">최신 리뷰</h2>
             <p className="text-muted-foreground text-sm">
-              See examples of the SEO articles we create for our clients
+              고객을 위해 제작한 SEO 아티클 예시를 확인하세요
             </p>
           </div>
 
@@ -469,7 +461,7 @@ export default async function PricingPage() {
                           {/* Review Badge */}
                           <div className="mb-4">
                             <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs">
-                              Product Review
+                              제품 리뷰
                             </span>
                           </div>
 
@@ -498,16 +490,14 @@ export default async function PricingPage() {
               href="/reviews"
               className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
             >
-              View all reviews →
+              모든 리뷰 보기 →
             </Link>
           </div>
         </div>
       )}
 
       <div className="mx-auto mb-12 max-w-3xl">
-        <h2 className="mb-4 text-center text-xl font-bold sm:text-2xl">
-          Frequently Asked Questions
-        </h2>
+        <h2 className="mb-4 text-center text-xl font-bold sm:text-2xl">자주 묻는 질문</h2>
         <Accordion type="single" collapsible className="w-full -space-y-px" defaultValue="1">
           {faqItems.map((item) => (
             <AccordionItem

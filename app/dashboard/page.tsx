@@ -74,7 +74,7 @@ export default async function Dashboard() {
 
   return (
     <div className="min-h-[calc(100vh-64px)] py-6 sm:py-8">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1200px] px-4">
         {/* Dashboard Header */}
         <div className="mb-8">
           <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">

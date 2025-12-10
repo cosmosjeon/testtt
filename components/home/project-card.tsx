@@ -60,7 +60,7 @@ export function ProjectCard({
 
   return (
     <div
-      className="group cursor-pointer rounded-xl p-3 transition-colors hover:bg-zinc-50 sm:p-4 dark:hover:bg-zinc-900/50"
+      className="group cursor-pointer rounded-lg p-3 transition-colors hover:bg-zinc-50 sm:p-4 dark:hover:bg-zinc-900/50"
       onClick={(e) => {
         e.stopPropagation()
         router.push(projectPageUrl)

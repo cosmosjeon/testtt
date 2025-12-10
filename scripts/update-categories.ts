@@ -1,7 +1,8 @@
 import { db } from "@/drizzle/db"
 import { category } from "@/drizzle/db/schema"
+import { eq } from "drizzle-orm"
 
-const TECH_PROJECT_CATEGORIES = [
+const CATEGORY_UPDATES = [
   // Development & IT
   { id: "developer-tools", name: "개발자 도구" },
   { id: "api", name: "API & 통합" },
@@ -54,18 +55,29 @@ const TECH_PROJECT_CATEGORIES = [
   { id: "security", name: "보안" },
 ]
 
-const initializeCategories = async () => {
-  const data = await db
-  const categories = await data.query.category.findMany()
-  if (categories.length === 0) {
-    await data.insert(category).values(TECH_PROJECT_CATEGORIES)
+const updateCategories = async () => {
+  console.log("🔄 카테고리 업데이트 시작...")
+
+  try {
+    for (const cat of CATEGORY_UPDATES) {
+      await db.update(category).set({ name: cat.name }).where(eq(category.id, cat.id))
+      console.log(`✅ ${cat.id} → ${cat.name}`)
+    }
+
+    console.log("\n🎉 모든 카테고리가 한글로 업데이트되었습니다!")
+  } catch (error) {
+    console.error("❌ 에러 발생:", error)
+    throw error
   }
 }
 
-try {
-  initializeCategories().then(() => {
-    console.log("✅ Initialisation des catégories technologiques réussie !")
+// 실행
+updateCategories()
+  .then(() => {
+    console.log("\n✅ 카테고리 업데이트 완료")
+    process.exit(0)
   })
-} catch (error) {
-  console.error("❌ Erreur lors de l'initialisation des catégories :", error)
-}
+  .catch((error) => {
+    console.error("\n❌ 카테고리 업데이트 실패:", error)
+    process.exit(1)
+  })

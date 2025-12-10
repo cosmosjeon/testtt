@@ -81,15 +81,15 @@ async function TrendingData({
 
   if (filter === "today") {
     projects = await getTodayProjects(PROJECT_LIMITS_VARIABLES.VIEW_ALL_PAGE_TODAY_YESTERDAY_LIMIT)
-    title = "Today's Launches"
+    title = "오늘의 런칭"
   } else if (filter === "yesterday") {
     projects = await getYesterdayProjects(
       PROJECT_LIMITS_VARIABLES.VIEW_ALL_PAGE_TODAY_YESTERDAY_LIMIT,
     )
-    title = "Yesterday's Launches"
+    title = "어제의 런칭"
   } else {
     projects = await getMonthBestProjects(PROJECT_LIMITS_VARIABLES.VIEW_ALL_PAGE_MONTH_LIMIT)
-    title = "Best of the Month"
+    title = "이번 달 베스트"
   }
 
   return (
@@ -100,7 +100,7 @@ async function TrendingData({
 
       {projects.length === 0 ? (
         <div className="text-muted-foreground border-border bg-card rounded-lg border border-dashed py-8 text-center text-sm">
-          No projects found for this period.
+          이 기간에 해당하는 프로젝트가 없습니다.
         </div>
       ) : (
         <div className="-mx-3 flex flex-col sm:-mx-4">
@@ -144,7 +144,7 @@ export default async function TrendingPage({
 
   return (
     <main className="bg-secondary/20">
-      <div className="container mx-auto min-h-screen max-w-6xl px-4 pt-8 pb-12">
+      <div className="container mx-auto min-h-screen max-w-[1200px] px-4 pt-8 pb-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:items-start">
           {/* Contenu principal */}
           <div className="space-y-6 sm:space-y-8 lg:col-span-2">
@@ -157,21 +157,21 @@ export default async function TrendingPage({
           <div className="top-24">
             {/* Quick Stats */}
             <div className="space-y-3 py-5 pt-0">
-              <h3 className="flex items-center gap-2 font-semibold">Live Now</h3>
+              <h3 className="flex items-center gap-2 font-semibold">라이브</h3>
               <Link
                 href="/trending"
                 className="bg-secondary/30 hover:bg-secondary/50 border-primary block rounded-md border-l-4 px-5 py-2 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-colors"
               >
                 <div className="flex items-center gap-4">
                   <div className="text-primary text-2xl font-bold">{ongoingLaunches}</div>
-                  <div className="text-sm font-medium">Active Launches</div>
+                  <div className="text-sm font-medium">진행 중인 런칭</div>
                 </div>
               </Link>
             </div>
 
             {/* Time Filters */}
             <div className="space-y-3 py-5">
-              <h3 className="flex items-center gap-2 font-semibold">Time Range</h3>
+              <h3 className="flex items-center gap-2 font-semibold">기간</h3>
               <div className="space-y-2">
                 <Link
                   href="/trending?filter=today"
@@ -179,7 +179,7 @@ export default async function TrendingPage({
                     filter === "today" ? "bg-muted font-medium" : "hover:bg-muted/40"
                   }`}
                 >
-                  Today&apos;s Launches
+                  오늘의 런칭
                 </Link>
                 <Link
                   href="/trending?filter=yesterday"
@@ -187,7 +187,7 @@ export default async function TrendingPage({
                     filter === "yesterday" ? "bg-muted font-medium" : "hover:bg-muted/40"
                   }`}
                 >
-                  Yesterday&apos;s Launches
+                  어제의 런칭
                 </Link>
                 <Link
                   href="/trending?filter=month"
@@ -195,26 +195,26 @@ export default async function TrendingPage({
                     filter === "month" ? "bg-muted font-medium" : "hover:bg-muted/40"
                   }`}
                 >
-                  This Month&apos;s Best
+                  이번 달 베스트
                 </Link>
               </div>
             </div>
 
             {/* Quick Access */}
             <div className="space-y-3 py-5">
-              <h3 className="flex items-center gap-2 font-semibold">Quick Access</h3>
+              <h3 className="flex items-center gap-2 font-semibold">빠른 접근</h3>
               <div className="space-y-2">
                 <Link
                   href="/winners"
                   className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                 >
-                  Daily Winners
+                  일일 위너
                 </Link>
                 <Link
                   href="/categories"
                   className="-mx-2 flex items-center gap-2 rounded-md p-2 text-sm transition-colors hover:underline"
                 >
-                  Browse Categories
+                  카테고리 둘러보기
                 </Link>
               </div>
             </div>
@@ -222,10 +222,10 @@ export default async function TrendingPage({
             {/* Categories */}
             <div className="space-y-3 py-5">
               <div className="flex items-center justify-between">
-                <h3 className="flex items-center gap-2 font-semibold">Top Categories</h3>
+                <h3 className="flex items-center gap-2 font-semibold">인기 카테고리</h3>
                 <Button variant="ghost" size="sm" className="text-sm" asChild>
                   <Link href="/categories" className="flex items-center gap-1">
-                    View all
+                    전체 보기
                   </Link>
                 </Button>
               </div>
@@ -238,7 +238,7 @@ export default async function TrendingPage({
                   >
                     <span className="text-sm">{category.name}</span>
                     <span className="text-muted-foreground bg-secondary rounded-full px-2 py-0.5 text-xs">
-                      {category.count} projects
+                      {category.count} 프로젝트
                     </span>
                   </Link>
                 ))}

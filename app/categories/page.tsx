@@ -245,7 +245,7 @@ export default async function CategoriesPage({
 
   return (
     <main className="bg-secondary/20">
-      <div className="container mx-auto min-h-screen max-w-6xl px-4 pt-8 pb-12">
+      <div className="container mx-auto min-h-screen max-w-[1200px] px-4 pt-8 pb-12">
         <div className="mb-6 flex flex-col">
           <h1 className="text-2xl font-bold">카테고리</h1>
 

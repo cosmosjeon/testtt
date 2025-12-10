@@ -4,22 +4,22 @@ export function SponsorCards() {
   return (
     <>
       <SponsorCard
-        name="Nexty.dev"
-        url="https://nexty.dev?ref=open-launch"
-        imageUrl="https://nexty.dev/logo.png"
-        description="Launch Your SaaS Fast & Earn Money Fast."
+        name="Outsome"
+        url="https://outsome.com"
+        imageUrl="/outsome_logo.jpg"
+        description="혁신적인 솔루션을 제공하는 스타트업"
       />
       <SponsorCard
-        name="Findly.tools"
-        url="https://findly.tools?ref=open-launch"
-        imageUrl="https://yxucdfr9f5.ufs.sh/f/M3RHr0TmpHk58YQSMZbg1XPzV7Kxo25HAvNtwa6hLcRpjB0T"
-        description="The best tools, all in one place."
+        name="Zero to 100"
+        url="https://zero100.startup"
+        imageUrl="/zero100.webp"
+        description="스타트업 성장 가속 프로그램"
       />
       <SponsorCard
-        name="Image Translate AI"
-        url="https://imagetranslate.ai?ref=open-launch"
-        imageUrl="https://yxucdfr9f5.ufs.sh/f/M3RHr0TmpHk5QfdPFFNjGs3nmiJ1bxOqZfoYRvFaCt7VPMDU"
-        description="Translate image text instantly."
+        name="성균관대학교"
+        url="https://www.skku.edu"
+        imageUrl="/성균관대.jpg"
+        description="미래를 선도하는 글로벌 명문대학"
       />
     </>
   )

@@ -67,7 +67,7 @@ export default async function BlogPage() {
 
   return (
     <div className="bg-background min-h-screen">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="text-foreground mb-4 text-2xl font-bold md:text-3xl">Blog</h1>

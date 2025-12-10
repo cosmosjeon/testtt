@@ -5,21 +5,21 @@ import { RiGithubFill, RiTwitterXFill } from "@remixicon/react"
 
 // Link groups for a columnar layout
 const discoverLinks = [
-  { title: "Trending", href: "/trending" },
-  { title: "Categories", href: "/categories" },
-  { title: "Submit Project", href: "/projects/submit" },
+  { title: "트렌딩", href: "/trending" },
+  { title: "카테고리", href: "/categories" },
+  { title: "프로젝트 제출", href: "/projects/submit" },
 ]
 
 const resourcesLinks = [
-  { title: "Pricing", href: "/pricing" },
-  { title: "Sponsors", href: "/sponsors" },
-  { title: "Blog", href: "/blog" },
+  { title: "가격", href: "/pricing" },
+  { title: "스폰서", href: "/sponsors" },
+  { title: "블로그", href: "/blog" },
 ]
 
 const legalLinks = [
-  { title: "Terms of Service", href: "/legal/terms" },
-  { title: "Privacy Policy", href: "/legal/privacy" },
-  { title: "Attribution Badges", href: "/legal/badges" },
+  { title: "서비스 약관", href: "/legal/terms" },
+  { title: "개인정보 처리방침", href: "/legal/privacy" },
+  { title: "어트리뷰션 뱃지", href: "/legal/badges" },
 ]
 
 // Liens pour la nouvelle colonne "Connect"
@@ -39,21 +39,21 @@ const connectLinkItems = [
 export default function FooterSection() {
   return (
     <footer className="bg-background border-t pt-6 pb-10">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-12 md:gap-x-8">
           {/* Left Section: Brand, Copyright, Author, Badges - Align left on mobile */}
           <div className="flex flex-col items-start text-left md:col-span-4 lg:col-span-4">
             <Link href="/" className="font-heading mb-3 flex items-center">
               <span className="font-heading flex items-center text-lg font-bold">
                 <img src="/logo.svg" alt="logo" className="mr-1 h-6 w-6" />
-                Open-Launch
+                바이브코딩 커뮤니티
               </span>
             </Link>
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} Open-Launch. All rights reserved.
+              © {new Date().getFullYear()} 바이브코딩 커뮤니티. 모든 권리 보유.
             </p>
             <p className="text-muted-foreground mb-4 text-sm">
-              Open source project by{" "}
+              오픈소스 프로젝트 by{" "}
               <Link
                 href="https://x.com/Ericbn09"
                 target="_blank"
@@ -82,7 +82,7 @@ export default function FooterSection() {
             {/* Discover Column */}
             <div className="text-left">
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase">
-                Discover
+                발견하기
               </h3>
               <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
                 {discoverLinks.map((link) => (
@@ -101,7 +101,7 @@ export default function FooterSection() {
             {/* Resources Column */}
             <div className="text-left">
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase">
-                Resources
+                리소스
               </h3>
               <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
                 {resourcesLinks.map((link) => (
@@ -120,7 +120,7 @@ export default function FooterSection() {
             {/* Legal Column */}
             <div className="text-left">
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase">
-                Legal
+                법률
               </h3>
               <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
                 {legalLinks.map((link) => (
@@ -139,7 +139,7 @@ export default function FooterSection() {
             {/* Connect Column */}
             <div className="text-left">
               <h3 className="text-foreground text-sm font-semibold tracking-wider uppercase">
-                Connect
+                연결
               </h3>
               <ul role="list" className="mt-4 flex flex-col items-start space-y-3">
                 {connectLinkItems.map((item) => (
@@ -163,7 +163,7 @@ export default function FooterSection() {
         <div className="border-border/40 mt-8 border-t">
           <div className="mx-auto max-w-5xl pt-4">
             <h3 className="text-muted-foreground mb-4 text-center text-xs font-medium tracking-wider uppercase">
-              Earned Badges
+              획득한 뱃지
             </h3>
             {/* Featured on findly.tools */}
             <div className="mb-4 flex flex-wrap items-center justify-center">

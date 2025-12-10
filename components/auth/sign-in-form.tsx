@@ -42,12 +42,46 @@ export function SignInForm() {
     try {
       await signIn.social({
         provider: provider as "google" | "github",
-        callbackURL: "/dashboard",
+        callbackURL: "/",
       })
     } catch (error) {
       setGeneralError(error instanceof Error ? error.message : "An error occurred")
     } finally {
       setLoadingButtons((prevState) => ({ ...prevState, [provider]: false }))
+    }
+  }
+
+  // ============================================
+  // 🚧 DEV ONLY - Remove before production! 🚧
+  // ============================================
+  // 개발용 빠른 로그인
+  // 프로덕션 배포 시 아래 함수와 버튼(LINE 133-161)을 삭제하세요
+  const handleDevLogin = async (email: string) => {
+    try {
+      setLoadingButtons((prevState) => ({ ...prevState, email: true }))
+      toast.info("Dev login in progress...")
+
+      const response = await fetch("/api/dev-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to login")
+      }
+
+      toast.success("Dev login successful!")
+      window.location.href = data.redirectTo || "/"
+    } catch (error) {
+      console.error("Dev login error:", error)
+      toast.error(error instanceof Error ? error.message : "Dev login failed")
+    } finally {
+      setLoadingButtons((prevState) => ({ ...prevState, email: false }))
     }
   }
 
@@ -60,7 +94,7 @@ export function SignInForm() {
     const options = {
       email: data.email,
       password: data.password,
-      callbackURL: "/dashboard",
+      callbackURL: "/",
       fetchOptions: {
         headers: {
           "x-captcha-response": turnstileToken,
@@ -77,7 +111,7 @@ export function SignInForm() {
         setGeneralError(result.error.message)
         return
       }
-      router.push("/dashboard")
+      router.push("/")
     } catch (error) {
       setGeneralError(error instanceof Error ? error.message : "An error occurred")
     } finally {
@@ -93,7 +127,7 @@ export function SignInForm() {
         },
         onSuccess: () => {
           toast.success("Successfully signed in")
-          window.location.href = "/dashboard"
+          window.location.href = "/"
         },
       },
     })
@@ -103,13 +137,45 @@ export function SignInForm() {
     <div className="mx-auto flex w-full max-w-md flex-col gap-4 px-4 sm:px-0">
       <Card className="w-full rounded-md shadow-none">
         <CardHeader className="flex flex-col items-center gap-2 px-4 sm:px-6">
-          <CardTitle className="text-center text-xl sm:text-2xl">Welcome back</CardTitle>
-          <CardDescription className="text-center">
-            Sign in to your account to continue
-          </CardDescription>
+          <CardTitle className="text-center text-xl sm:text-2xl">
+            다시 오신 것을 환영합니다
+          </CardTitle>
+          <CardDescription className="text-center">계정에 로그인하여 계속하세요</CardDescription>
         </CardHeader>
         <CardContent className="px-4 pb-6 sm:px-6">
           <form onSubmit={handleSubmit(handleLoginEmail)} className="flex flex-col gap-4">
+            {/* 개발 환경에서만 표시되는 빠른 로그인 버튼 */}
+            {process.env.NODE_ENV === "development" && (
+              <div className="space-y-2">
+                <p className="text-muted-foreground text-center text-xs">Dev Mode - Quick Login</p>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    className="w-full cursor-pointer text-xs"
+                    variant="secondary"
+                    type="button"
+                    onClick={() => handleDevLogin("dev@test.com")}
+                    disabled={loadingButtons.email}
+                  >
+                    Admin
+                  </Button>
+                  <Button
+                    className="w-full cursor-pointer text-xs"
+                    variant="secondary"
+                    type="button"
+                    onClick={() => handleDevLogin("designer@test.com")}
+                    disabled={loadingButtons.email}
+                  >
+                    Designer
+                  </Button>
+                </div>
+                <div className="border-border relative text-center text-xs after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+                  <span className="bg-background text-muted-foreground relative z-10 px-2">
+                    Or use social login
+                  </span>
+                </div>
+              </div>
+            )}
+
             <Button
               className="w-full cursor-pointer"
               variant="outline"
@@ -118,7 +184,7 @@ export function SignInForm() {
               disabled={loadingButtons.google}
             >
               <RiGoogleFill className="me-1" size={16} aria-hidden="true" />
-              {loadingButtons.google ? "Loading..." : "Login with Google"}
+              {loadingButtons.google ? "로딩 중..." : "구글로 로그인"}
             </Button>
             <Button
               className="w-full cursor-pointer"
@@ -128,17 +194,15 @@ export function SignInForm() {
               disabled={loadingButtons.github}
             >
               <RiGithubFill className="me-1" size={16} aria-hidden="true" />
-              {loadingButtons.github ? "Loading..." : "Login with GitHub"}
+              {loadingButtons.github ? "로딩 중..." : "Github로 로그인"}
             </Button>
 
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-              <span className="bg-background text-muted-foreground relative z-10 px-2">
-                Or continue with
-              </span>
+              <span className="bg-background text-muted-foreground relative z-10 px-2">또는</span>
             </div>
             <div className="grid gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">이메일</Label>
                 <Input
                   id="email"
                   type="email"
@@ -150,12 +214,12 @@ export function SignInForm() {
               </div>
               <div className="grid gap-2">
                 <div className="flex flex-wrap items-center justify-between gap-1">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">비밀번호</Label>
                   <Link
                     href="/forgot-password"
                     className="text-xs underline-offset-4 hover:underline"
                   >
-                    Forgot your password?
+                    비밀번호를 잊으셨나요?
                   </Link>
                 </div>
                 <Input id="password" type="password" {...register("password")} className="w-full" />
@@ -172,22 +236,22 @@ export function SignInForm() {
                 className="w-full cursor-pointer"
                 disabled={loadingButtons.email || !turnstileToken}
               >
-                {loadingButtons.email ? "Logging in..." : "Login"}
+                {loadingButtons.email ? "로그인 중..." : "로그인"}
               </Button>
             </div>
 
             <div className="text-muted-foreground text-center text-sm">
-              Don&apos;t have an account?{" "}
+              계정이 없으신가요?{" "}
               <Link href="/sign-up" className="text-primary underline-offset-4 hover:underline">
-                Sign up
+                회원가입
               </Link>
             </div>
           </form>
         </CardContent>
       </Card>
       <div className="text-muted-foreground [&_a]:hover:text-primary px-4 text-center text-xs text-balance [&_a]:underline [&_a]:underline-offset-4">
-        By clicking continue, you agree to our <Link href="/legal/terms">Terms of Service</Link> and{" "}
-        <Link href="/legal/privacy">Privacy Policy</Link>.
+        계속 진행하면 <Link href="/legal/terms">서비스 약관</Link> 및{" "}
+        <Link href="/legal/privacy">개인정보 처리방침</Link>에 동의하는 것으로 간주됩니다.
       </div>
     </div>
   )

@@ -105,7 +105,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="bg-background min-h-screen">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-[1200px] px-6">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Main Content - 2 colonnes */}
           <div className="lg:col-span-2">
